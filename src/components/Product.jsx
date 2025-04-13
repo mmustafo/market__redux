@@ -1,24 +1,32 @@
+// src/components/Product.jsx
 import React from "react";
 import { Link } from "react-router-dom";
-import { addToCart } from "../app/feature/cardSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { store } from "../app/store";
+import {
+  addToCart,
+  incrementAmount,
+  decrementAmount,
+} from "../app/feature/cardSlice";
+
 function Product({ producttt }) {
-  const handelBuy = (e) => {
-    const dispatch = useDispatch();
-    const { cart } = useSelector((store) => store.cart);
-    const isAdded = cart.find((i) => i.id == producttt.id);
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart.cart);
+  const isAdded = cart.find((item) => item.id === producttt.id);
+
+  const handleBuy = (e) => {
     e.preventDefault();
     dispatch(addToCart({ ...producttt, amount: 1 }));
   };
+
   return (
     <div>
-      <Link to={`/producttt/${producttt.id}`}></Link>
-      {isAdded && (
+      <Link to={`/product/${producttt.id}`}>{producttt.title}</Link>
+      {isAdded ? (
         <>
           <button
             onClick={(e) => {
-              dispatch(incirimentAmout(producttt.id)), e.preventDefault();
+              e.preventDefault();
+              dispatch(incrementAmount(producttt.id));
             }}
           >
             +
@@ -26,15 +34,16 @@ function Product({ producttt }) {
           <span>{isAdded.amount}</span>
           <button
             onClick={(e) => {
-              dispatch(decrimenttAmout(producttt.id));
               e.preventDefault();
+              dispatch(decrementAmount(producttt.id));
             }}
           >
             -
           </button>
         </>
+      ) : (
+        <button onClick={handleBuy}>buy</button>
       )}
-      {isAdded && <button onClick={(e) => handelBuy}></button>}
     </div>
   );
 }

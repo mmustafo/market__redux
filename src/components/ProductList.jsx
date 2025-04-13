@@ -1,13 +1,22 @@
-import { useLoaderData } from "react-router-dom";
+
+import React from "react";
 import Product from "./Product";
+import { useLoaderData } from "react-router-dom";
 
 function ProductList() {
-     const {data: {products}} = useLoaderData()
-  return <div>
-     {products && products.map((producttt) => {
-          return <Product producttt={producttt} key={producttt.id}/>
-     })}
-  </div>;
+  const { data: { products } } = useLoaderData(); 
+
+  if (!products) {
+    return <div>No products available</div>; 
+  }
+
+  return (
+    <div>
+      {products.map((producttt) => ( 
+        <Product key={producttt.id} producttt={producttt} /> 
+      ))}
+    </div>
+  );
 }
 
 export default ProductList;

@@ -1,7 +1,17 @@
-function Contact() {
-  return (
-    <div>Contact</div>
-  )
+
+import { useLoaderData } from "react-router-dom";
+
+export function loader() {
+
+  return null;
 }
 
-export default Contact
+function Contact() {
+  useLoaderData();
+
+  return (
+    <div>Contact</div>
+  );
+}
+
+export default Contact;
