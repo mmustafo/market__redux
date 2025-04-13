@@ -11,7 +11,7 @@ function Navbar() {
             
             
           </div>
-          <a className="btn btn-ghost text-xl">sssMarketd</a>
+          <Link to="/" className="btn btn-ghost text-xl">sssMarketd</Link>
         </div>
         <div className="navbar-center md:flex md:gap-3 hidden lg:flex">
           <Link className="btn btn-info" to="/">Home</Link>
